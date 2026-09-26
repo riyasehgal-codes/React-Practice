@@ -8,5 +8,9 @@ body {
   margin: 0;
   min-width: 320px;
   font-family: Inter, system-ui, sans-serif;
-  background: #070914;
+  background:
+    linear-gradient(rgba(255, 59, 157, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(54, 185, 255, 0.035) 1px, transparent 1px),
+    #070914;
+  background-size: 40px 40px;
 }

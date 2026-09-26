@@ -1,7 +1,7 @@
 function Header() {
   return (
-    <header className="text-center">
-
+    <header className="relative text-center">
+    <div className="pointer-events-none absolute left-1/2 top-8 h-32 w-64 -translate-x-1/2 rounded-full bg-[#ff3b9d]/10 blur-3xl" />
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.4em] text-[#ff4fa3]">
         my little space
       </p>
