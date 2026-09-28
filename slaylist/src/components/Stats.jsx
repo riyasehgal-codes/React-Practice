@@ -1,34 +1,37 @@
-function Stats( {total, completed, remaining} ) {
+function Stats({ total, completed, remaining }) {
   return (
-    <section className="grid grid-cols-3 gap-3 sm:gap-5">
+    <section className="grid grid-cols-3 gap-3 sm:gap-4">
 
-      <div className="rounded-2xl border border-[#ff3b9d]/40 bg-[#101426] p-5 text-center shadow-[0_0_25px_rgba(255,59,157,0.08)]">
-        <h2 className="text-3xl font-semibold text-[#ff4fa3]">
+      {/* Total tasks */}
+      <div className="rounded-2xl border border-white/10 bg-[#111320] p-5 text-center transition duration-200 hover:-translate-y-0.5 hover:border-[#FF4FA3]/40">
+        <p className="text-3xl font-black text-white sm:text-4xl">
           {total}
-        </h2>
+        </p>
 
-        <p className="mt-1 text-xs font-medium uppercase tracking-widest text-[#8f98ba]">
+        <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-[#FF91C7]">
           Total
         </p>
       </div>
 
-      <div className="rounded-2xl border border-[#36b9ff]/40 bg-[#101426] p-5 text-center shadow-[0_0_25px_rgba(54,185,255,0.08)]">
-        <h2 className="text-3xl font-semibold text-[#36b9ff]">
+      {/* Completed tasks */}
+      <div className="rounded-2xl border border-[#FF4FA3]/20 bg-[#111320] p-5 text-center transition duration-200 hover:-translate-y-0.5 hover:border-[#FF4FA3]/50">
+        <p className="text-3xl font-black text-[#FF4FA3] sm:text-4xl">
           {completed}
-        </h2>
+        </p>
 
-        <p className="mt-1 text-xs font-medium uppercase tracking-widest text-[#8f98ba]">
-          Completed
+        <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-[#FF91C7]">
+          Done
         </p>
       </div>
 
-      <div className="rounded-2xl border border-[#ff4057]/40 bg-[#101426] p-5 text-center shadow-[0_0_25px_rgba(255,64,87,0.08)]">
-        <h2 className="text-3xl font-semibold text-[#ff4057]">
+      {/* Remaining tasks */}
+      <div className="rounded-2xl border border-white/10 bg-[#111320] p-5 text-center transition duration-200 hover:-translate-y-0.5 hover:border-[#FF6FB5]/40">
+        <p className="text-3xl font-black text-[#FFC1DE] sm:text-4xl">
           {remaining}
-        </h2>
+        </p>
 
-        <p className="mt-1 text-xs font-medium uppercase tracking-widest text-[#8f98ba]">
-          Remaining
+        <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-[#FF91C7]">
+          Left
         </p>
       </div>
 

@@ -9,12 +9,20 @@ function TodoItem2({
   onSaveTask,
   onCancelEditing,
 }) {
-
+  /*
+    These states temporarily store the values
+    while the user is editing a task.
+  */
   const [editTitle, setEditTitle] = useState(task.title);
   const [editCategory, setEditCategory] = useState(task.category);
   const [editPriority, setEditPriority] = useState(task.priority);
 
+  /*
+    Sends the updated values back to App.jsx.
+  */
   const handleSave = () => {
+    if (!editTitle.trim()) return;
+
     onSaveTask(task.id, {
       title: editTitle,
       category: editCategory,
@@ -22,140 +30,161 @@ function TodoItem2({
     });
   };
 
+  /* ---------------- EDIT MODE ---------------- */
+
   if (isEditing) {
     return (
-      <div className="rounded-2xl border border-[#36b9ff]/40 bg-[#0e1220] p-5 shadow-[0_0_25px_rgba(54,185,255,0.08)]">
+      <div className="rounded-3xl border border-[#FF4FA3]/40 bg-[#111320] p-6">
 
-        <div className="flex flex-col gap-3">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-[#FF91C7]">
+          editing task
+        </p>
 
-          <input
-            type="text"
-            value={editTitle}
-            onChange={(e) => setEditTitle(e.target.value)}
-            className="w-full rounded-xl border border-[#252c46] bg-[#080b15] px-4 py-3 text-sm text-white outline-none focus:border-[#36b9ff]"
-          />
+        {/* Edit task title */}
+        <input
+          type="text"
+          value={editTitle}
+          onChange={(event) => setEditTitle(event.target.value)}
+          className="w-full rounded-2xl border border-white/10 bg-[#090a12] px-4 py-3 text-base text-white outline-none focus:border-[#FF4FA3]"
+        />
 
-          <div className="flex flex-col gap-3 sm:flex-row">
+        {/* Edit category and priority */}
+        <div className="mt-3 flex flex-col gap-3 sm:flex-row">
 
-            <select
-              value={editCategory}
-              onChange={(e) => setEditCategory(e.target.value)}
-              className="flex-1 rounded-xl border border-[#252c46] bg-[#080b15] px-4 py-3 text-sm text-white outline-none focus:border-[#36b9ff]"
-            >
-              <option value="Personal">Personal</option>
-              <option value="Study">Study</option>
-              <option value="College">College</option>
-              <option value="Work">Work</option>
-            </select>
+          <select
+            value={editCategory}
+            onChange={(event) => setEditCategory(event.target.value)}
+            className="flex-1 rounded-2xl border border-white/10 bg-[#090a12] px-4 py-3 text-sm text-white outline-none focus:border-[#FF4FA3]"
+          >
+            <option value="Personal">Personal</option>
+            <option value="Study">Study</option>
+            <option value="College">College</option>
+            <option value="Work">Work</option>
+          </select>
 
-            <select
-              value={editPriority}
-              onChange={(e) => setEditPriority(e.target.value)}
-              className="flex-1 rounded-xl border border-[#252c46] bg-[#080b15] px-4 py-3 text-sm text-white outline-none focus:border-[#36b9ff]"
-            >
-              <option value="Low">Low Priority</option>
-              <option value="Medium">Medium Priority</option>
-              <option value="High">High Priority</option>
-            </select>
-
-          </div>
-
-          <div className="flex gap-2">
-
-            <button
-              onClick={handleSave}
-              className="rounded-lg bg-[#36b9ff] px-4 py-2 text-xs font-semibold text-white transition hover:shadow-[0_0_15px_rgba(54,185,255,0.4)]"
-            >
-              Save
-            </button>
-
-            <button
-              onClick={onCancelEditing}
-              className="rounded-lg border border-[#252c46] px-4 py-2 text-xs text-[#78829f] transition hover:text-white"
-            >
-              Cancel
-            </button>
-
-          </div>
+          <select
+            value={editPriority}
+            onChange={(event) => setEditPriority(event.target.value)}
+            className="flex-1 rounded-2xl border border-white/10 bg-[#090a12] px-4 py-3 text-sm text-white outline-none focus:border-[#FF4FA3]"
+          >
+            <option value="Low">Low Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="High">High Priority</option>
+          </select>
 
         </div>
 
+        {/* Save / cancel */}
+        <div className="mt-4 flex gap-3">
+
+          <button
+            onClick={handleSave}
+            className="rounded-xl bg-[#FF4FA3] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#FF6FB5]"
+          >
+            Save
+          </button>
+
+          <button
+            onClick={onCancelEditing}
+            className="rounded-xl border border-white/10 px-5 py-2.5 text-sm font-bold text-[#C5C8D6] transition hover:border-[#FF4FA3]/40 hover:text-white"
+          >
+            Cancel
+          </button>
+
+        </div>
       </div>
     );
   }
 
+  /* ---------------- NORMAL MODE ---------------- */
+
   return (
     <div
-      className={`group flex items-center justify-between rounded-2xl border p-5 transition-all duration-200 ${
+      className={`group relative flex flex-col gap-4 rounded-3xl border p-5 transition-all duration-200 sm:flex-row sm:items-center sm:justify-between ${
         task.completed
-          ? "border-[#36b9ff]/30 bg-[#0b101c] opacity-70"
-          : "border-[#252c46] bg-[#0e1220] hover:-translate-y-0.5 hover:border-[#ff3b9d]/60 hover:shadow-[0_0_25px_rgba(255,59,157,0.12)]"
+          ? "border-white/5 bg-[#0D0E16] opacity-55"
+          : "border-white/10 bg-[#111320] hover:-translate-y-0.5 hover:border-[#FF4FA3]/40 hover:shadow-[0_15px_35px_rgba(0,0,0,0.25)]"
       }`}
     >
 
-      <div className="flex items-center gap-4">
+      {/* Small decorative sparkle */}
+      <span className="absolute right-5 top-4 text-sm text-[#FF6FB5]/60 transition group-hover:text-[#FF4FA3]">
+        ✦
+      </span>
 
+      <div className="flex min-w-0 items-start gap-4">
+
+        {/* Complete / incomplete button */}
         <button
           onClick={() => onToggleTask(task.id)}
-          className={`flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs transition-all duration-200 ${
+          aria-label="Toggle task completion"
+          className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-black transition ${
             task.completed
-              ? "border-[#36b9ff] bg-[#36b9ff] text-white shadow-[0_0_15px_rgba(54,185,255,0.5)]"
-              : "border-[#ff3b9d] text-[#ff3b9d] hover:bg-[#ff3b9d] hover:text-white hover:shadow-[0_0_15px_rgba(255,59,157,0.5)]"
+              ? "border-[#FF4FA3] bg-[#FF4FA3] text-white"
+              : "border-[#FF6FB5]/60 text-transparent hover:border-[#FF4FA3] hover:bg-[#FF4FA3]/10"
           }`}
         >
-          {task.completed ? "✓" : "○"}
+          {task.completed ? "✓" : "✓"}
         </button>
 
-        <div>
+        {/* Task information */}
+        <div className="min-w-0">
 
           <h3
-            className={`font-medium ${
+            className={`text-lg font-bold sm:text-xl ${
               task.completed
-                ? "text-[#68708d] line-through"
+                ? "text-[#8F94A6] line-through"
                 : "text-white"
             }`}
           >
             {task.title}
           </h3>
 
-          <div className="mt-1 flex items-center gap-2">
+          {/* Category and priority */}
+          <div className="mt-2 flex flex-wrap items-center gap-2">
 
-            <span className="text-xs text-[#7f89a9]">
+            <span className="rounded-full bg-[#FF4FA3]/10 px-3 py-1 text-xs font-bold text-[#FF91C7]">
               {task.category}
             </span>
 
-            <span className="text-[#39415d]">
-              ·
+            <span className="text-[#5F6475]">
+              •
             </span>
 
-            <span className="text-xs font-semibold text-[#ff4057]">
-              {task.priority} Priority
+            <span
+              className={`rounded-full border px-3 py-1 text-xs font-bold ${
+                task.priority === "High"
+                  ? "border-[#FF4FA3]/40 bg-[#FF4FA3]/10 text-[#FF6FB5]"
+                  : task.priority === "Medium"
+                  ? "border-[#FF91C7]/40 bg-[#FF91C7]/10 text-[#FFB0D3]"
+                  : "border-[#FFC1DE]/40 bg-[#FFC1DE]/10 text-[#FFC1DE]"
+              }`}
+            >
+              {task.priority}
             </span>
 
           </div>
-
         </div>
-
       </div>
 
-      <div className="flex gap-1">
+      {/* Edit / delete buttons */}
+      <div className="flex gap-2 sm:shrink-0">
 
         <button
           onClick={() => onStartEditing(task.id)}
-          className="rounded-lg px-3 py-2 text-xs text-[#78829f] transition-all duration-200 hover:bg-[#151b2d] hover:text-[#36b9ff]"
+          className="rounded-xl border border-white/10 px-4 py-2 text-sm font-bold text-[#C5C8D6] transition hover:border-[#FF4FA3]/40 hover:text-[#FF91C7]"
         >
           Edit
         </button>
 
         <button
           onClick={() => onDeleteTask(task.id)}
-          className="rounded-lg px-3 py-2 text-xs text-[#78829f] transition-all duration-200 hover:bg-[#151b2d] hover:text-[#ff4057]"
+          className="rounded-xl border border-[#FF4FA3]/20 px-4 py-2 text-sm font-bold text-[#FF91C7] transition hover:bg-[#FF4FA3] hover:text-white"
         >
           Delete
         </button>
 
       </div>
-
     </div>
   );
 }

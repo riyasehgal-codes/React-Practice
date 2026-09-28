@@ -1,16 +1,87 @@
 @import "tailwindcss";
 
+/* Makes sizing predictable across the whole app */
 * {
   box-sizing: border-box;
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Main page styling */
 body {
   margin: 0;
   min-width: 320px;
-  font-family: Inter, system-ui, sans-serif;
+
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  color: #ffffff;
+
+  /* Black + subtle midnight blue background */
   background:
-    linear-gradient(rgba(255, 59, 157, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(54, 185, 255, 0.035) 1px, transparent 1px),
-    #070914;
-  background-size: 40px 40px;
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(255, 79, 163, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 90%,
+      rgba(72, 92, 180, 0.08),
+      transparent 30%
+    ),
+    #090a12;
+
+  overflow-x: hidden;
+}
+
+/* Very subtle background pattern */
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: -1;
+
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px
+  );
+
+  background-size: 32px 32px;
+}
+
+/* Text selection */
+::selection {
+  background: #ff4fa3;
+  color: #ffffff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff4fa3;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6fb5;
+}
+
+/* Makes form controls use the same font */
+button,
+input,
+select {
+  font: inherit;
 }

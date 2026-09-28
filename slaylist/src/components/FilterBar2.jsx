@@ -1,50 +1,60 @@
 function FilterBar2({ filter, setFilter }) {
+  /*
+    Changes the current filter.
+
+    "all"       → shows every task
+    "pending"   → shows unfinished tasks
+    "completed" → shows completed tasks
+  */
+
+  const filters = [
+    { value: "all", label: "All" },
+    { value: "pending", label: "Pending" },
+    { value: "completed", label: "Done" },
+  ];
+
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
 
-      <p className="text-sm font-medium text-[#b7bdd5]">
-        Your tasks
-      </p>
+      {/* Heading */}
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="text-lg text-[#FF4FA3]">
+            ✦
+          </span>
 
-      <div className="flex w-fit rounded-xl border border-[#252c46] bg-[#0d1120] p-1">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#FF91C7]">
+            your plans
+          </p>
+        </div>
 
-        <button
-          onClick={() => setFilter("all")}
-          className={`rounded-lg px-4 py-2 text-xs font-semibold transition ${
-            filter === "all"
-              ? "bg-[#ff3b9d] text-white shadow-[0_0_12px_rgba(255,59,157,0.25)]"
-              : "text-[#7e88aa] hover:text-[#36b9ff]"
-          }`}
-        >
-          All
-        </button>
-
-
-        <button
-          onClick={() => setFilter("pending")}
-          className={`rounded-lg px-4 py-2 text-xs font-semibold transition ${
-            filter === "pending"
-              ? "bg-[#ff3b9d] text-white shadow-[0_0_12px_rgba(255,59,157,0.25)]"
-              : "text-[#7e88aa] hover:text-[#36b9ff]"
-          }`}
-        >
-          Pending
-        </button>
-
-
-        <button
-          onClick={() => setFilter("completed")}
-          className={`rounded-lg px-4 py-2 text-xs font-semibold transition ${
-            filter === "completed"
-              ? "bg-[#ff3b9d] text-white shadow-[0_0_12px_rgba(255,59,157,0.25)]"
-              : "text-[#7e88aa] hover:text-[#36b9ff]"
-          }`}
-        >
-          Completed
-        </button>
-
+        <p className="mt-1 text-sm text-[#8F94A6]">
+          Everything you want to get done.
+        </p>
       </div>
 
+      {/* Filter buttons */}
+      <div className="flex w-fit rounded-2xl border border-white/10 bg-[#111320] p-1">
+
+        {filters.map((item) => {
+          const isActive = filter === item.value;
+
+          return (
+            <button
+              key={item.value}
+              onClick={() => setFilter(item.value)}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition ${
+                isActive
+                  ? "bg-[#FF4FA3] text-white shadow-[0_5px_15px_rgba(255,79,163,0.18)]"
+                  : "text-[#9EA2B2] hover:text-white"
+              }`}
+            >
+              {item.label}
+            </button>
+          );
+        })}
+
+      </div>
     </div>
   );
 }

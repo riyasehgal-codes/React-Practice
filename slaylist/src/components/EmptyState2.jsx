@@ -1,21 +1,39 @@
-function EmptyState2() {
+function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-[#303854] bg-[#0b0f1b] px-6 py-10 text-center">
+    <div className="rounded-3xl border border-white/10 bg-[#111320] px-6 py-16 text-center">
 
-      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-[#ff3b9d]/40 bg-[#ff3b9d]/10 text-xl text-[#ff3b9d] shadow-[0_0_20px_rgba(255,59,157,0.12)]">
+      {/* Cute decorative symbol */}
+      <div className="text-5xl text-[#FF4FA3]">
         ♡
       </div>
 
-      <h2 className="font-medium text-white">
-        Your little list is empty.
+      <div className="mx-auto mt-5 flex items-center justify-center gap-3">
+
+        <span className="h-px w-10 bg-[#FF4FA3]/30" />
+
+        <span className="text-xs font-bold uppercase tracking-[0.3em] text-[#FF91C7]">
+          all clear
+        </span>
+
+        <span className="h-px w-10 bg-[#FF4FA3]/30" />
+
+      </div>
+
+      <h2 className="mt-5 text-3xl font-black text-white">
+        Nothing left to do
       </h2>
 
-      <p className="mt-2 text-sm text-[#727c9e]">
-        Nothing is waiting for you right now.
+      <p className="mx-auto mt-3 max-w-sm text-base leading-7 text-[#8F94A6]">
+        Your plans are all cleared up.
+        Enjoy the little victory.
       </p>
 
+      {/* Tiny cat reference */}
+      <p className="mt-6 text-sm font-medium text-[#FF6FB5]">
+        ฅ^•ﻌ•^ฅ
+      </p>
     </div>
   );
 }
 
-export default EmptyState2;
+export default EmptyState;
